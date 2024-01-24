@@ -1,0 +1,10 @@
+﻿namespace PoguScripts.Enums
+{
+    public enum GameStage
+    {
+        NONE,
+        THROW_BANANA,
+        BLOW_WIG,
+        FEATHER_GIGGLE
+    }
+}
