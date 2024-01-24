@@ -1,3 +1,4 @@
+using PoguScripts.GlobalEvents;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,7 @@ public class BananaTarget : MonoBehaviour
         transform.position = startPos;
         _Dest = destPos;
         _isThrow = false;
+        _Running = false;
         mRenderer = GetComponent<SpriteRenderer>();
         mRenderer.flipX = startPos.x > destPos.x;
         Debug.Log((mRenderer.flipX) ? "Left" : "Right");
@@ -37,6 +39,7 @@ public class BananaTarget : MonoBehaviour
 
     public void Call()
     {
+        Debug.Log("Call");
         _isThrow = true;
     }
 
@@ -44,22 +47,15 @@ public class BananaTarget : MonoBehaviour
     {
         if(_Running)
         {
-            if(Vector2.Distance(mBanana.transform.position, transform.position) <= mDistToSlide && _isThrow)
+            if (Vector2.Distance(_Dest, transform.position) < mDistToSlide && !_isThrow)
             {
                 _Running = false;
-                mGame.Touch(true);
+                GlobalEvent.OnMiss?.Invoke();
                 return;
             }
-            else if (Vector2.Distance(_Dest, transform.position) > mDistToSlide && _isThrow)
+            else if(Vector2.Distance(mBanana.transform.position, transform.position) < mDistToSlide)
             {
                 _Running = false;
-                mGame.Touch(false);
-                return;
-            }
-            else if (Vector2.Distance(_Dest, transform.position) < mDistToSlide && !_isThrow)
-            {
-                _Running = false;
-                mGame.Touch(false);
                 return;
             }
             else
@@ -70,5 +66,36 @@ public class BananaTarget : MonoBehaviour
     public bool IsRunning()
     {
         return _Running;
+    }
+
+    private void OnEnable()
+    {
+        GlobalEvent.OnHit.AddListener(Touched);
+        GlobalEvent.OnMiss.AddListener(NotTouched);
+    }
+
+    private void Touched()
+    {
+        mGame.Touch(true);
+    }
+    private void NotTouched()
+    {
+        mGame.Touch(false);
+    }
+
+    private void OnDestroy()
+    {
+        GlobalEvent.OnHit.RemoveListener(Touched);
+        GlobalEvent.OnMiss.RemoveListener(NotTouched);
+    }
+    private void OnDisable()
+    {
+        GlobalEvent.OnHit.RemoveListener(Touched);
+        GlobalEvent.OnMiss.RemoveListener(NotTouched);
+    }
+    private void OnApplicationQuit()
+    {
+        GlobalEvent.OnHit.RemoveListener(Touched);
+        GlobalEvent.OnMiss.RemoveListener(NotTouched);
     }
 }

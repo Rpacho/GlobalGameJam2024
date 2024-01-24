@@ -1,3 +1,5 @@
+using PoguScripts.GlobalEvents;
+using PoguScripts.UI.TimingBarUI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,7 +30,7 @@ public class BananaMiniGame : MonoBehaviour
     private float _TargetSpeed = 3.0f;
 
     [SerializeField]
-    private float _BananaSpeed = 4.0f;
+    private float _BananaSpeed = 10.0f;
 
     public GameObject _Target;
     public GameObject _BananaObject;
@@ -51,19 +53,26 @@ public class BananaMiniGame : MonoBehaviour
     private Vector2 _BananaDestination;
 
     [SerializeField]
+    private int _Score = 1000;
+
+    [SerializeField]
     private AudioClip mSuccess;    
     [SerializeField]
     private AudioClip mThrow;
     private bool isShooted = false;
-    private bool isWin = false;
     private bool isLeft = false;
     private Animator mMonkeyAnimator;
+    private SpriteRenderer mMonkeySprite;
+    private WaitForSeconds _WaitSec = new WaitForSeconds(1);
+
+    public TimingBarView mView;
 
     public Canvas mCanvas;
     private Text mText;
 
     public event Action mGameStartAction;
-    
+    public static int mLevel = 0;
+
     void Start()
     {
         Initialize();
@@ -71,21 +80,24 @@ public class BananaMiniGame : MonoBehaviour
 
     public void Initialize()
     {
+        StopCoroutine(ShootBanana());
         mState = BananaState.None;
-        isShooted = isWin = false;
-        mGameStartAction = null;
+        isShooted = false;
+        mGameStartAction = null;   
 
         _Wait = _BeginWait;
 
+        mView.gameObject.SetActive(false);
         mGameStartAction += GameStart;
         _BananaObject.transform.position = _BananaOriginalPosition;
         _BananaTarget = _Target.GetComponent<BananaTarget>();
         mMonkeyAnimator = transform.Find("Monkey").GetComponent<Animator>();
+        mMonkeySprite = transform.Find("Monkey").GetComponent<SpriteRenderer>();
         mText = mCanvas.transform.Find("Text").GetComponent<Text>();
         int rand = Random.Range(0, 100);
         isLeft = rand > 50;
-        _BananaTarget.Initialize(this, _TargetSpeed, rand > 50 ? _TargetLeftOriginalPosition :
-            _TargetRightOriginalPosition, rand > 50 ? _TargetLeftDestination : _TargetRightDestination);
+        _BananaTarget.Initialize(this, _TargetSpeed, isLeft ? _TargetLeftOriginalPosition :
+            _TargetRightOriginalPosition, isLeft ? _TargetLeftDestination : _TargetRightDestination);
         mState = BananaState.Initialize;
     }
 
@@ -109,16 +121,9 @@ public class BananaMiniGame : MonoBehaviour
                 break;
             case BananaState.Start:
                 {
-                    if (!_BananaTarget.IsRunning())
+                    if(Input.GetKeyDown(KeyCode.Space) && !isShooted)
                     {
-                        GameEnd();
-                        return;
-                    }
-                    if (Input.GetKeyDown(KeyCode.Space) && !isShooted)
-                    {
-                        //Shooted
-                        isShooted = true;
-                        StartCoroutine(ShootBanana());
+                        GlobalEvent.OnClickedSpace?.Invoke();
                     }
                 }
                 break;
@@ -131,28 +136,18 @@ public class BananaMiniGame : MonoBehaviour
 
     public void GameStart()
     {
+        mView.gameObject.SetActive(true);
+        GlobalEvent.OnChangedGameSpeed?.Invoke(mLevel++);
         mText.gameObject.SetActive(false);
         _Time = _MaximumTime;
         mState = BananaState.Start;
         Debug.Log("Start!");
     }
 
-    public void GameEnd()
+    private void Shoot()
     {
-        mState = BananaState.End;
-        mText.gameObject.SetActive(true);
-        if (isWin)
-        {
-            mText.text = "Win!";
-            Debug.Log("Win");
-            // Win
-        }
-        else
-        {
-            mText.text = "Lose!";
-            Debug.Log("Lose");
-            // Lose Life
-        }
+        isShooted = true;
+        StartCoroutine(ShootBanana());
     }
 
     private IEnumerator ShootBanana()
@@ -161,7 +156,7 @@ public class BananaMiniGame : MonoBehaviour
         while (true)
         {
             _BananaObject.transform.position = Vector2.MoveTowards(_BananaObject.transform.position, _BananaDestination, Time.deltaTime * _BananaSpeed);
-            if(Vector2.Distance(_BananaObject.transform.position, _BananaDestination) < 0.5f)
+            if (Vector2.Distance(_BananaObject.transform.position, _BananaDestination) <= 0.5f)
             {
                 _BananaTarget.Call();
                 break;
@@ -169,6 +164,7 @@ public class BananaMiniGame : MonoBehaviour
             else
                 yield return null;
         }
+        
         yield return null;
     }
 
@@ -179,12 +175,62 @@ public class BananaMiniGame : MonoBehaviour
 
     public void Touch(bool touch)
     {
-        isWin = touch;
-        if(isWin)
+        if(touch)
         {
             // Play SFX
         }
-        GameEnd();
+    }
+
+    public void Condition()
+    {
+        StartCoroutine(Wait());
+    }
+
+    private IEnumerator Wait()
+    {
+        yield return _WaitSec;
+        mState = BananaState.End;
+        mText.gameObject.SetActive(true);
+        float dist = Vector2.Distance(_BananaObject.transform.position, _Target.transform.position);
+        Debug.Log(dist);
+        if (dist < 4.0f)
+        {
+            mText.text = "Win!";
+            GlobalEvent.OnChangedScore?.Invoke(_Score);
+        }
+        else
+        {
+            mText.text = "Lose!";
+            GlobalEvent.OnChangedLife?.Invoke(-1);
+        }
+        yield return _WaitSec;
+        Initialize();
+    }
+
+    private void OnEnable()
+    {
+        GlobalEvent.OnClickedSpace.AddListener(Shoot);
+        GlobalEvent.OnHit.AddListener(Condition);
+        GlobalEvent.OnMiss.AddListener(Condition);
+    }
+
+    private void OnDestroy()
+    {
+        GlobalEvent.OnClickedSpace.RemoveListener(Shoot);
+        GlobalEvent.OnHit.RemoveListener(Condition);
+        GlobalEvent.OnMiss.RemoveListener(Condition);
+    }
+    private void OnDisable()
+    {
+        GlobalEvent.OnClickedSpace.RemoveListener(Shoot);
+        GlobalEvent.OnHit.RemoveListener(Condition);
+        GlobalEvent.OnMiss.RemoveListener(Condition);
+    }
+    private void OnApplicationQuit()
+    {
+        GlobalEvent.OnClickedSpace.RemoveListener(Shoot);
+        GlobalEvent.OnHit.RemoveListener(Condition);
+        GlobalEvent.OnMiss.RemoveListener(Condition);
     }
 
     private void OnDrawGizmos()
