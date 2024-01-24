@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aeeb19d358046c1b7812375b47acc49, type: 3}
+  m_Name: GameData
+  m_EditorClassIdentifier: 
+  lifePoints: 3
+  scorePoints: 0
+  gameSpeed: 1
+  volumeValue: 1
+  currentGameState: 0
