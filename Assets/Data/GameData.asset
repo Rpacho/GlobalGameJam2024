@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   lifePoints: 3
-  scorePoints: 0
-  gameSpeed: 1
+  scorePoints: 5
+  gameSpeed: 2
   volumeValue: 1
   currentGameState: 0
