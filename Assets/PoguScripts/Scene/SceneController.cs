@@ -15,11 +15,13 @@ namespace PoguScripts.Scene
         private List<SceneData> sceneNames;
 
         [SerializeField] private GameData _gameData;
+        public bool loadSceneOnStart = false;
 
         private IEnumerator Start()
         {
             yield return new WaitForSeconds(2f);
-            LoadRandomScene();
+            if(loadSceneOnStart)
+                LoadRandomScene();
         }
 
         public void LoadRandomScene()
