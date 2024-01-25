@@ -19,13 +19,6 @@ public class BananaMiniGame : MonoBehaviour
 
     private BananaState mState = BananaState.None;
 
-    private float _BeginWait = 3.0f;
-    private float _Wait = 0.0f;
-
-    [SerializeField]
-    private float _MaximumTime = 5.0f;
-    private float _Time = 0.0f;
-
     [SerializeField]
     private float _TargetSpeed = 3.0f;
 
@@ -38,19 +31,18 @@ public class BananaMiniGame : MonoBehaviour
     private BananaTarget _BananaTarget;
 
     [SerializeField]
-    private Vector2 _TargetLeftOriginalPosition;
+    private Vector3 _TargetLeftOriginalPosition;
     [SerializeField]
-    private Vector2 _TargetRightOriginalPosition;
+    private Vector3 _TargetRightOriginalPosition;
     [SerializeField]
-    private Vector2 _TargetLeftDestination;
+    private Vector3 _TargetLeftDestination;
     [SerializeField]
-    private Vector2 _TargetRightDestination;
+    private Vector3 _TargetRightDestination;
+
+    private Vector3 _BananaOriginalPosition;
 
     [SerializeField]
-    private Vector2 _BananaOriginalPosition;
-
-    [SerializeField]
-    private Vector2 _BananaDestination;
+    private Vector3 _BananaDestination;
 
     [SerializeField]
     private int _Score = 1000;
@@ -62,16 +54,15 @@ public class BananaMiniGame : MonoBehaviour
     private bool isShooted = false;
     private bool isLeft = false;
     private Animator mMonkeyAnimator;
-    private SpriteRenderer mMonkeySprite;
-    private WaitForSeconds _WaitSec = new WaitForSeconds(1);
+    private WaitForSeconds _WaitSec = new WaitForSeconds(0.5f);
 
     public TimingBarView mView;
 
     public Canvas mCanvas;
-    private Text mText;
 
     public event Action mGameStartAction;
     public static int mLevel = 0;
+    private bool isTouched = false;
 
     void Start()
     {
@@ -81,23 +72,23 @@ public class BananaMiniGame : MonoBehaviour
     public void Initialize()
     {
         StopCoroutine(ShootBanana());
+
+        mCanvas = transform.parent.GetComponent<Canvas>();
+
+        _BananaOriginalPosition = _BananaObject.transform.position;
+
         mState = BananaState.None;
         isShooted = false;
         mGameStartAction = null;   
 
-        _Wait = _BeginWait;
-
         mView.gameObject.SetActive(false);
         mGameStartAction += GameStart;
-        _BananaObject.transform.position = _BananaOriginalPosition;
         _BananaTarget = _Target.GetComponent<BananaTarget>();
-        mMonkeyAnimator = transform.Find("Monkey").GetComponent<Animator>();
-        mMonkeySprite = transform.Find("Monkey").GetComponent<SpriteRenderer>();
-        mText = mCanvas.transform.Find("Text").GetComponent<Text>();
+        mMonkeyAnimator = transform.Find("Monkey").Find("Arm").GetComponent<Animator>();
         int rand = Random.Range(0, 100);
         isLeft = rand > 50;
-        _BananaTarget.Initialize(this, _TargetSpeed, isLeft ? _TargetLeftOriginalPosition :
-            _TargetRightOriginalPosition, isLeft ? _TargetLeftDestination : _TargetRightDestination);
+        _BananaTarget.Initialize(mView,this, _TargetSpeed, isLeft ? mCanvas.transform.position + _TargetLeftOriginalPosition :
+            mCanvas.transform.position + _TargetRightOriginalPosition, isLeft ? _TargetLeftDestination : _TargetRightDestination);
         mState = BananaState.Initialize;
     }
 
@@ -109,14 +100,7 @@ public class BananaMiniGame : MonoBehaviour
                 break;
             case BananaState.Initialize:
                 {
-                    if (_Wait > 0.0f)
-                    {
-                        _Wait -= Time.deltaTime;
-                        mText.text = Mathf.RoundToInt(_Wait).ToString();
-                        if (_Wait <= 0.0f)
-                            mGameStartAction?.Invoke();
-                        return;
-                    }
+                    mGameStartAction?.Invoke();
                 }
                 break;
             case BananaState.Start:
@@ -136,11 +120,9 @@ public class BananaMiniGame : MonoBehaviour
 
     public void GameStart()
     {
-        mView.gameObject.SetActive(true);
-        GlobalEvent.OnChangedGameSpeed?.Invoke(mLevel++);
-        mText.gameObject.SetActive(false);
-        _Time = _MaximumTime;
         mState = BananaState.Start;
+        mView.gameObject.SetActive(true);
+        //GlobalEvent.OnChangedGameSpeed?.Invoke(mLevel++);
         Debug.Log("Start!");
     }
 
@@ -152,19 +134,23 @@ public class BananaMiniGame : MonoBehaviour
 
     private IEnumerator ShootBanana()
     {
+        mMonkeyAnimator.SetTrigger("Throw");
         PlayAudioThrowBanana();
+        float increase = 1.1f;
         while (true)
         {
-            _BananaObject.transform.position = Vector2.MoveTowards(_BananaObject.transform.position, _BananaDestination, Time.deltaTime * _BananaSpeed);
-            if (Vector2.Distance(_BananaObject.transform.position, _BananaDestination) <= 0.5f)
+            _BananaObject.transform.position = Vector2.MoveTowards(_BananaObject.transform.position, mCanvas.transform.position + _BananaDestination, Time.deltaTime * _BananaSpeed * increase);
+            if (Vector2.Distance(_BananaObject.transform.position, mCanvas.transform.position + _BananaDestination) <= 0.1f)
             {
-                _BananaTarget.Call();
                 break;
             }
             else
+            {
+                increase += 0.1f;
                 yield return null;
+            }
         }
-        
+        _BananaTarget.Call();
         yield return null;
     }
 
@@ -175,7 +161,8 @@ public class BananaMiniGame : MonoBehaviour
 
     public void Touch(bool touch)
     {
-        if(touch)
+        isTouched = touch;
+        if (touch)
         {
             // Play SFX
         }
@@ -190,21 +177,15 @@ public class BananaMiniGame : MonoBehaviour
     {
         yield return _WaitSec;
         mState = BananaState.End;
-        mText.gameObject.SetActive(true);
-        float dist = Vector2.Distance(_BananaObject.transform.position, _Target.transform.position);
-        Debug.Log(dist);
-        if (dist < 4.0f)
+        if (isTouched)
         {
-            mText.text = "Win!";
             GlobalEvent.OnChangedScore?.Invoke(_Score);
         }
         else
         {
-            mText.text = "Lose!";
             GlobalEvent.OnChangedLife?.Invoke(-1);
         }
         yield return _WaitSec;
-        Initialize();
     }
 
     private void OnEnable()

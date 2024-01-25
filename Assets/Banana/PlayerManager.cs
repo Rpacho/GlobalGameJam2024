@@ -19,33 +19,18 @@ public class PlayerManager : MonoBehaviour
             mInstance = this;
         DontDestroyOnLoad(gameObject);
         GlobalEvent.OnChangedScore.AddListener(AddScore);
-
-        mCanvas = transform.Find("Canvas").GetComponent<Canvas>();
-        mScore = mCanvas.transform.Find("Score").GetComponent<TextMeshProUGUI>();
-
-        mScore.text = 0.ToString();
     }
 
-    private Canvas mCanvas;
-
-    private TextMeshProUGUI mScore;
-    private Image mHealth;
-    private Sprite[] mHealthSprite = new Sprite[9];
-    private bool isGameOver = false;
+    public int Score { get { return mGameData.Score; } }
+    public int Life { get { return mGameData.Life; } }
 
     public GameData mGameData;
+
+    public bool isGameWon { set; get; } = false;
 
     public void Load(GameData gameData)
     {
         mGameData = gameData;
-    }
-
-    public void UpdateHealth()
-    {
-        if(mGameData != null)
-        {
-            mHealth.sprite = mHealthSprite[mHealthSprite.Length - mGameData.Life];
-        }
     }
 
     public void AddScore(int score)
@@ -53,7 +38,7 @@ public class PlayerManager : MonoBehaviour
         if(mGameData != null)
         {
             mGameData.Score += score;
-            mScore.text = mGameData.Score.ToString();
+            isGameWon = true;
         }
     }
 
@@ -62,27 +47,21 @@ public class PlayerManager : MonoBehaviour
         if (mGameData == null)
             return;
         if (mGameData.Life > 1)
-        {
             mGameData.Life--;
-            UpdateHealth();
-        }
-        else
-            isGameOver = true;
+        isGameWon = false;
     }
 
     public void ResetData()
     {
         if (mGameData == null)
             return;
-        isGameOver = false;
         mGameData.Life = 8;
         mGameData.Score = 0;
-        UpdateHealth();
-        mScore.text = mGameData.Score.ToString();
     }
 
     private void OnDestroy()
     {
-        
+        mGameData.Life = 8;
+        mGameData.Score = 0;
     }
 }
