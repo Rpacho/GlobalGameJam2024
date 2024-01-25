@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3151957179011429239
 MonoBehaviour:
@@ -49,4 +49,7 @@ MonoBehaviour:
     sceneName: Banana
   - gameStage: 2
     sceneName: Wig
+  - gameStage: 3
+    sceneName: FeatherTickle
   _gameData: {fileID: 11400000, guid: 811f68cfc0d5e7345ba5a77a8185f2ca, type: 2}
+  loadSceneOnStart: 0

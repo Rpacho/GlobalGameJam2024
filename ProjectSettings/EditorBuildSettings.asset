@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 6eb3027fe925bdf418453f8dd3b5b145
+  - enabled: 1
+    path: Assets/Scenes/FeatherTickle.unity
+    guid: b3024afced5f033468151a5787eee6ad
   m_configObjects: {}
