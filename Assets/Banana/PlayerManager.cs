@@ -18,7 +18,6 @@ public class PlayerManager : MonoBehaviour
         else
             mInstance = this;
         DontDestroyOnLoad(gameObject);
-        GlobalEvent.OnChangedScore.AddListener(AddScore);
 
         mCanvas = transform.Find("Canvas").GetComponent<Canvas>();
         mScore = mCanvas.transform.Find("Score").GetComponent<TextMeshProUGUI>();
