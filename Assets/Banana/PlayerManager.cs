@@ -1,27 +1,50 @@
+using System;
 using PoguScripts.GlobalEvents;
 using PoguScripts.Scriptable;
 using System.Collections;
 using System.Collections.Generic;
+using PoguScripts.Enums;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager mInstance;
     public static PlayerManager Instance { get { return mInstance; } }
-
     private void Awake()
     {
+        ResetData();
         if (mInstance != null && mInstance != this)
             Destroy(gameObject);
         else
             mInstance = this;
         DontDestroyOnLoad(gameObject);
 
-        GlobalEvent.OnChangedScore.AddListener(AddScore);
-
     }
+
+    private void OnEnable()
+    {
+        GlobalEvent.OnHit.AddListener(delegate { GainScoreEachRound();
+            LoadResultScene();
+        });
+        GlobalEvent.OnMiss.AddListener(delegate { DecrementLife();
+            LoadResultScene();
+        });
+    }
+
+    private void OnDisable()
+    {
+        GlobalEvent.OnHit.RemoveListener(delegate { GainScoreEachRound();
+            LoadResultScene();
+        });
+        GlobalEvent.OnMiss.RemoveListener(delegate { DecrementLife();
+            LoadResultScene();
+        });
+    }
+
+
 
     public int Score { get { return mGameData.Score; } }
     public int Life { get { return mGameData.Life; } }
@@ -48,7 +71,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (mGameData == null)
             return;
-        if (mGameData.Life > 1)
+        if (mGameData.Life >= 1)
             mGameData.Life--;
         isGameWon = false;
     }
@@ -57,13 +80,37 @@ public class PlayerManager : MonoBehaviour
     {
         if (mGameData == null)
             return;
-        mGameData.Life = 8;
+        mGameData.Life = 3;
+        mGameData.prevLifePoints = 3;
+        mGameData.prevScore = 0;
         mGameData.Score = 0;
+        mGameData.CurrentGameStage = GameStage.NONE;
+    }
+
+    private void GainScoreEachRound()
+    {
+        AddScore(100);
     }
 
     private void OnDestroy()
     {
-        mGameData.Life = 8;
-        mGameData.Score = 0;
+
+    }
+
+    public void LoadResultScene()
+    {
+        StartCoroutine(WaitForSec());
+    }
+
+    IEnumerator WaitForSec()
+    {
+        yield return new WaitForSeconds(1f);
+
+        SceneManager.LoadScene("Result");
+    }
+    
+    private void DecrementLife()
+    {
+        Defeat();
     }
 }

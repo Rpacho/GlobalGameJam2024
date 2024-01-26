@@ -36,6 +36,7 @@ namespace PoguScripts.Scene
                 Debug.Log(prevSceneIndex != sceneNames[nextSceneIndex].gameStage);
             } while (prevSceneIndex == sceneNames[nextSceneIndex].gameStage);
 
+            _gameData.CurrentGameStage = sceneNames[nextSceneIndex].gameStage;
             SceneManager.LoadScene(sceneNames[nextSceneIndex].sceneName);
         }
 

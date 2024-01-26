@@ -13,12 +13,16 @@ namespace PoguScripts.Scriptable
         [SerializeField]private float volumeValue;
         [SerializeField]private GameStage currentGameState = GameStage.NONE;
 
+        public int prevLifePoints = 3;
+        public int prevScore = 0;
+
 
         public int Life
         {
             get => lifePoints;
             set
             {
+                prevLifePoints = lifePoints;
                 lifePoints = value;
                 GlobalEvent.OnChangedLife.Invoke(lifePoints);
             } 
@@ -29,6 +33,7 @@ namespace PoguScripts.Scriptable
             get => scorePoints;
             set
             {
+                prevScore = scorePoints;
                 scorePoints = value;
                 GlobalEvent.OnChangedScore.Invoke(scorePoints);
             } 
