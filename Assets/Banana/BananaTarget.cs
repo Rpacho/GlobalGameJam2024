@@ -53,7 +53,7 @@ public class BananaTarget : MonoBehaviour
     {
         if(_Running)
         {
-            transform.localPosition = new Vector3(Mathf.Lerp(_Start.x, _Dest.x, Mathf.PingPong(mTimingBarView.newArrowPosY * Time.deltaTime / 5.0f, 1800.0f)), 0, 0);
+            transform.localPosition = new Vector3(Mathf.Lerp(_Start.x, _Dest.x, Mathf.PingPong(mTimingBarView.newArrowPosY * Time.deltaTime / 5.0f, 1800.0f)), 272, 0);
 
             if (transform.localPosition.x >= 700)
             {
