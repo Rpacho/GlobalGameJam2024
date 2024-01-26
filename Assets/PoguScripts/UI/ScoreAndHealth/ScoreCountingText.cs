@@ -51,6 +51,7 @@ namespace PoguScripts.UI.ScoreAndHealth
                 else
                 {
                     isCounting = false;
+                    gameData.prevScore = currentScore;
                 }
             }
         }

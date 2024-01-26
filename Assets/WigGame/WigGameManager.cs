@@ -45,7 +45,7 @@ public class WigGameManager : MonoBehaviour
                     character.state = WigCharacter.WigState.blown;
                     wig.state = WigCharacter.WigState.blown;
                     GlobalEvent.OnHit.Invoke();
-                    AddScore(1 * difficultyScoreBonusModifier);
+                    // AddScore(1 * difficultyScoreBonusModifier);
                     success = true;
                     Debug.Log("Success!");
                 }
@@ -102,21 +102,21 @@ public class WigGameManager : MonoBehaviour
         if(elapsedTime > timeLimit && !failed && !success)
         {
             GlobalEvent.OnMiss.Invoke();
-            LoseLife();
+            // LoseLife();
             failed = true;
             Debug.Log("Failed!");
         }
     }
 
-    private void AddScore(int score)
-    {
-        gameData.Score += score;
-    }
+    // private void AddScore(int score)
+    // {
+    //     gameData.Score += score;
+    // }
 
-    private void LoseLife()
-    {
-        gameData.Life -= 1;
-    }
+    // private void LoseLife()
+    // {
+    //     gameData.Life -= 1;
+    // }
 
     public float GetTimeRemaining()
     {

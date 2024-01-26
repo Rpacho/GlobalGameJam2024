@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aeeb19d358046c1b7812375b47acc49, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  lifePoints: 2
+  lifePoints: 1
   scorePoints: 0
-  gameSpeed: 2
+  gameSpeed: 1
   volumeValue: 1
   currentGameState: 0
-  prevLifePoints: 3
+  prevLifePoints: 2
   prevScore: 0

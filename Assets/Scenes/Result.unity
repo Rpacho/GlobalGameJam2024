@@ -189,8 +189,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.094249964, y: 0.25699985, z: 0}
-    m_Extent: {x: 4.6644497, y: 4.1779, z: 0}
+    m_Center: {x: 0.09159994, y: 0.26839995, z: 0}
+    m_Extent: {x: 4.6566, y: 4.1747, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -347,8 +347,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.09174991, y: 0.2594999, z: 0}
-    m_Extent: {x: 4.66265, y: 4.1782, z: 0}
+    m_Center: {x: 0.09310007, y: 0.26335, z: 0}
+    m_Extent: {x: 4.6608, y: 4.17905, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -720,6 +720,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 566110155}
+  - component: {fileID: 566110156}
   m_Layer: 0
   m_Name: Hearts
   m_TagString: Untagged
@@ -745,6 +746,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &566110156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566110154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf29e569bce3473ca2931bf27c1c5ba5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameData: {fileID: 11400000, guid: 811f68cfc0d5e7345ba5a77a8185f2ca, type: 2}
+  HeartList:
+  - {fileID: 1229961141}
+  - {fileID: 904044939}
+  - {fileID: 1715785497}
 --- !u!1001 &601790397
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1011,7 +1029,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &904044938
 Transform:
   m_ObjectHideFlags: 0
@@ -1448,7 +1466,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1229961141
 Animator:
   serializedVersion: 5
@@ -1756,7 +1774,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameData: {fileID: 11400000, guid: 811f68cfc0d5e7345ba5a77a8185f2ca, type: 2}
   text: {fileID: 1613928259}
-  durationOfEachCount: 0.03
+  durationOfEachCount: 0.015
 --- !u!1 &1667646166
 GameObject:
   m_ObjectHideFlags: 0
@@ -1889,7 +1907,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1715785496
 Transform:
   m_ObjectHideFlags: 0
@@ -2205,8 +2223,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.09739995, y: 0.25349998, z: 0}
-    m_Extent: {x: 4.6584997, y: 4.1759, z: 0}
+    m_Center: {x: 0.09705019, y: 0.25830007, z: 0}
+    m_Extent: {x: 4.66185, y: 4.1734, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

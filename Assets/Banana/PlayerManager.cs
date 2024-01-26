@@ -15,6 +15,10 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
+        mGameData.Life = 3;
+        mGameData.prevLifePoints = 3;
+        mGameData.prevScore = 0;
+        mGameData.Score = 0;
         if (mInstance != null && mInstance != this)
             Destroy(gameObject);
         else
@@ -25,15 +29,25 @@ public class PlayerManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GlobalEvent.OnHit.AddListener(LoadResultScene);
-        GlobalEvent.OnMiss.AddListener(LoadResultScene);
+        GlobalEvent.OnHit.AddListener(delegate { GainScoreEachRound();
+            LoadResultScene();
+        });
+        GlobalEvent.OnMiss.AddListener(delegate { DecrementLife();
+            LoadResultScene();
+        });
     }
 
     private void OnDisable()
     {
-        GlobalEvent.OnHit.RemoveListener(LoadResultScene);
-        GlobalEvent.OnMiss.RemoveListener(LoadResultScene);
+        GlobalEvent.OnHit.RemoveListener(delegate { GainScoreEachRound();
+            LoadResultScene();
+        });
+        GlobalEvent.OnMiss.RemoveListener(delegate { DecrementLife();
+            LoadResultScene();
+        });
     }
+
+
 
     public int Score { get { return mGameData.Score; } }
     public int Life { get { return mGameData.Life; } }
@@ -60,7 +74,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (mGameData == null)
             return;
-        if (mGameData.Life > 1)
+        if (mGameData.Life >= 1)
             mGameData.Life--;
         isGameWon = false;
     }
@@ -73,14 +87,29 @@ public class PlayerManager : MonoBehaviour
         mGameData.Score = 0;
     }
 
+    private void GainScoreEachRound()
+    {
+        AddScore(100);
+    }
+
     private void OnDestroy()
     {
-        mGameData.Life = 8;
-        mGameData.Score = 0;
+
     }
 
     public void LoadResultScene()
     {
+        StartCoroutine(WaitForSec());
+    }
+
+    IEnumerator WaitForSec()
+    {
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("Result");
+    }
+    
+    private void DecrementLife()
+    {
+        Defeat();
     }
 }
