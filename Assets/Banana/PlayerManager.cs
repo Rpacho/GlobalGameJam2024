@@ -3,6 +3,7 @@ using PoguScripts.GlobalEvents;
 using PoguScripts.Scriptable;
 using System.Collections;
 using System.Collections.Generic;
+using PoguScripts.Enums;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,10 +16,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        mGameData.Life = 3;
-        mGameData.prevLifePoints = 3;
-        mGameData.prevScore = 0;
-        mGameData.Score = 0;
+        ResetData();
         if (mInstance != null && mInstance != this)
             Destroy(gameObject);
         else
@@ -83,8 +81,11 @@ public class PlayerManager : MonoBehaviour
     {
         if (mGameData == null)
             return;
-        mGameData.Life = 8;
+        mGameData.Life = 3;
+        mGameData.prevLifePoints = 3;
+        mGameData.prevScore = 0;
         mGameData.Score = 0;
+        mGameData.CurrentGameStage = GameStage.NONE;
     }
 
     private void GainScoreEachRound()
