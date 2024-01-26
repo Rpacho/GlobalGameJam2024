@@ -1379,7 +1379,7 @@ MonoBehaviour:
   gameoverCollider: {fileID: 853331666}
   winCollider: {fileID: 1633933741}
   lose: {fileID: 765656034}
-  knockbackForce: {x: -220, y: 0, z: 0}
+  knockbackForce: {x: -660, y: 0, z: 0}
 --- !u!4 &1643491872
 Transform:
   m_ObjectHideFlags: 0
