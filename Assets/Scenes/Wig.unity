@@ -699,6 +699,19 @@ MonoBehaviour:
   characterStateResetTime: 0.2
   failed: 0
   success: 0
+  wigMoveClipList:
+  - {fileID: 8300000, guid: de7e34a5c46bb5b4cb77fdbeee4eeef3, type: 3}
+  - {fileID: 8300000, guid: 014dfbf154767794ab27faac24505ade, type: 3}
+  fanClipList:
+  - {fileID: 8300000, guid: 6b18c8282779c6146bfe61ef44693233, type: 3}
+  - {fileID: 8300000, guid: 1435e75dc68f99f41b52c187bc62d8ef, type: 3}
+  - {fileID: 8300000, guid: d2f94d1eb62903e4e9dc5c1c10f8d4db, type: 3}
+  - {fileID: 8300000, guid: 083334fe0fd3a4144b835456c98bfd5c, type: 3}
+  - {fileID: 8300000, guid: 963c7fd0fd12f374094d54f1bb2eea83, type: 3}
+  - {fileID: 8300000, guid: 2c97f3961d5c6cc44b9908928a4113da, type: 3}
+  wigFallClip: {fileID: 8300000, guid: c17cbfa335d66a242b3a5a3f120b7621, type: 3}
+  cryingClip: {fileID: 8300000, guid: c5a50d4bbf006dc4683f67a3528287b9, type: 3}
+  panicClip: {fileID: 8300000, guid: 91425d8d88825f54eb3f62887075fb6c, type: 3}
 --- !u!4 &1624324866
 Transform:
   m_ObjectHideFlags: 0
