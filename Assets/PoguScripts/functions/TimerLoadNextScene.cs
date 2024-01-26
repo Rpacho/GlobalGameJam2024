@@ -12,6 +12,7 @@ namespace PoguScripts.functions
         public float duration = 3f;
         public GameData gameData;
         private SceneController _sceneController;
+        public bool isEnable = true;
         private void Awake()
         {
             _sceneController = GetComponent<SceneController>();
@@ -19,6 +20,7 @@ namespace PoguScripts.functions
 
         private void Update()
         {
+            if (isEnable == false) return;
             timeElapse += Time.deltaTime * gameData.GameSpeed;
             if (timeElapse < duration) return;
             LoadNextScene();
