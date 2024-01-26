@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneController
       objectReference: {fileID: 0}
+    - target: {fileID: 5781858315765079261, guid: c61dcdaa648af384280577017b026feb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8967249132667501584, guid: c61dcdaa648af384280577017b026feb, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -928,7 +932,15 @@ PrefabInstance:
     - target: {fileID: 2224152492131011370, guid: 31f03ce747956af4c90b0bbdf7b61066, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 980175834}
+      objectReference: {fileID: 1653705700}
+    - target: {fileID: 2224152492131011370, guid: 31f03ce747956af4c90b0bbdf7b61066, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadResultScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224152492131011370, guid: 31f03ce747956af4c90b0bbdf7b61066, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2895657742146290516, guid: 31f03ce747956af4c90b0bbdf7b61066, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

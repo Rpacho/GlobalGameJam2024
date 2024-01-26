@@ -1,9 +1,11 @@
+using System;
 using PoguScripts.GlobalEvents;
 using PoguScripts.Scriptable;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
@@ -19,6 +21,18 @@ public class PlayerManager : MonoBehaviour
             mInstance = this;
         DontDestroyOnLoad(gameObject);
 
+    }
+
+    private void OnEnable()
+    {
+        GlobalEvent.OnHit.AddListener(LoadResultScene);
+        GlobalEvent.OnMiss.AddListener(LoadResultScene);
+    }
+
+    private void OnDisable()
+    {
+        GlobalEvent.OnHit.RemoveListener(LoadResultScene);
+        GlobalEvent.OnMiss.RemoveListener(LoadResultScene);
     }
 
     public int Score { get { return mGameData.Score; } }
@@ -63,5 +77,10 @@ public class PlayerManager : MonoBehaviour
     {
         mGameData.Life = 8;
         mGameData.Score = 0;
+    }
+
+    public void LoadResultScene()
+    {
+        SceneManager.LoadScene("Result");
     }
 }
