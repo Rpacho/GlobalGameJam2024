@@ -8,6 +8,7 @@ public class FeatherGamemanger : MonoBehaviour
 {
     public GameData gameData;
     public Feather feather;
+    public GameObject shadow;
     public CooldownTimer tickleCooldown;
     public Feet feet;
     public FeatherGameoverCollider gameoverCollider;
@@ -72,6 +73,7 @@ public class FeatherGamemanger : MonoBehaviour
     {
         feather.gameObject.SetActive(false);
         feet.gameObject.SetActive(false);
+        shadow.SetActive(false);
         lose.SetActive(true);
     }
 
