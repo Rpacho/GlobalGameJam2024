@@ -13,9 +13,12 @@ public class Feet : MonoBehaviour
         tickle
     }
     public GameData gameData;
-    public Vector2 feetMaxSpeed;
-    public Vector2 feetAccel;
-    public Vector2 currentSpeed;
+    public GameObject feetpos;
+    public GameObject antpos;
+    public float feetMaxSpeed;
+    public float accelSpeed;
+    private Vector2 feetAccel;
+    private Vector2 maxSpeedVector;
     public Rigidbody2D rb;
     public FeetState state;
     public CooldownTimer feetTimer;
@@ -26,19 +29,25 @@ public class Feet : MonoBehaviour
     private void Start()
     {
         feetTimer.OnReady.AddListener(OnFeetReady);
-        rb.velocity = feetMaxSpeed * gameData.GameSpeed;
-        feetAccel = feetAccel * gameData.GameSpeed;
+
+        maxSpeedVector = antpos.transform.position - feetpos.transform.position;
+        maxSpeedVector.Normalize();
+        feetAccel = maxSpeedVector * accelSpeed * gameData.GameSpeed; //Set acceleration
+        maxSpeedVector = maxSpeedVector * feetMaxSpeed * gameData.GameSpeed;
+        rb.velocity = maxSpeedVector;
     }
     private void FixedUpdate()
     {
-        if (rb.velocity.x < feetMaxSpeed.x)
+        if (rb.velocity.magnitude < feetMaxSpeed)
         {
             rb.velocity += feetAccel * Time.deltaTime;
         }
-        if (rb.velocity.x > feetMaxSpeed.x)
+        /*
+        if (rb.velocity.magnitude > feetMaxSpeed)
         {
-            rb.velocity = feetMaxSpeed;
+            rb.velocity = maxSpeedVector;
         }
+        */
     }
     void Update()
     {
@@ -48,7 +57,7 @@ public class Feet : MonoBehaviour
     public void AddKnockback(Vector3 force)
     {
         rb.velocity = Vector2.zero;
-        rb.AddForce(force * successCount);
+        rb.AddForce(maxSpeedVector.normalized * force.x * successCount);
         successCount++;
     }
 
