@@ -19,12 +19,6 @@ public class BananaMiniGame : MonoBehaviour
 
     private BananaState mState = BananaState.None;
 
-    [SerializeField]
-    private float _TargetSpeed = 3.0f;
-
-    [SerializeField]
-    private float _BananaSpeed = 10.0f;
-
     public GameObject _Target;
     public GameObject _BananaObject;
 
@@ -48,9 +42,15 @@ public class BananaMiniGame : MonoBehaviour
     private int _Score = 1000;
 
     [SerializeField]
-    private AudioClip mSuccess;    
+    private AudioClip mHit;
     [SerializeField]
-    private AudioClip mThrow;
+    private AudioClip mSuccess;
+    [SerializeField]
+    private AudioClip mFail;
+    [SerializeField]
+    private AudioClip mThrow1;  
+    [SerializeField]
+    private AudioClip mThrow2;
     private bool isShooted = false;
     private bool isLeft = false;
     private Animator mMonkeyAnimator;
@@ -87,8 +87,7 @@ public class BananaMiniGame : MonoBehaviour
         mMonkeyAnimator = transform.Find("Monkey").Find("Arm").GetComponent<Animator>();
         int rand = Random.Range(0, 100);
         isLeft = rand > 50;
-        _BananaTarget.Initialize(mView,this, _TargetSpeed, isLeft ? mCanvas.transform.position + _TargetLeftOriginalPosition :
-            mCanvas.transform.position + _TargetRightOriginalPosition, isLeft ? _TargetLeftDestination : _TargetRightDestination);
+        _BananaTarget.Initialize(mView,this, isLeft ? _TargetLeftOriginalPosition : _TargetRightOriginalPosition, isLeft ? _TargetLeftDestination : _TargetRightDestination);
         mState = BananaState.Initialize;
     }
 
@@ -122,7 +121,6 @@ public class BananaMiniGame : MonoBehaviour
     {
         mState = BananaState.Start;
         mView.gameObject.SetActive(true);
-        //GlobalEvent.OnChangedGameSpeed?.Invoke(mLevel++);
         Debug.Log("Start!");
     }
 
@@ -139,7 +137,7 @@ public class BananaMiniGame : MonoBehaviour
         float increase = 1.1f;
         while (true)
         {
-            _BananaObject.transform.position = Vector2.MoveTowards(_BananaObject.transform.position, mCanvas.transform.position + _BananaDestination, Time.deltaTime * _BananaSpeed * increase);
+            _BananaObject.transform.position = Vector2.MoveTowards(_BananaObject.transform.position, mCanvas.transform.position + _BananaDestination, Time.deltaTime * 300.0f * increase);
             if (Vector2.Distance(_BananaObject.transform.position, mCanvas.transform.position + _BananaDestination) <= 0.1f)
             {
                 break;
@@ -150,13 +148,12 @@ public class BananaMiniGame : MonoBehaviour
                 yield return null;
             }
         }
-        _BananaTarget.Call();
         yield return null;
     }
 
     public void PlayAudioThrowBanana()
     {
-        //Throw
+        // Play Throw
     }
 
     public void Touch(bool touch)
@@ -164,7 +161,11 @@ public class BananaMiniGame : MonoBehaviour
         isTouched = touch;
         if (touch)
         {
-            // Play SFX
+            // Play Monkey Laugh SFX
+        }
+        else
+        {
+            // Play Human Laugh Sfx
         }
     }
 

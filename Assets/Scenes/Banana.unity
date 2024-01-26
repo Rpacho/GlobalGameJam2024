@@ -252,7 +252,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd76346d545de94b8f0e948cf17029c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mDistToSlide: 1.5
+  _RunningClip: {fileID: 8300000, guid: dc7aa2596dfa68d41a4ae10c4a4fae98, type: 3}
+  _Slip1: {fileID: 8300000, guid: 5d2230e753fd2a54d86dd5c45c14eee9, type: 3}
+  _Slip2: {fileID: 8300000, guid: 4ba92de64a0a0224e8bd433167fa157e, type: 3}
+  _HitClip: {fileID: 8300000, guid: 490adb825a7ce5548941ff38cd7aec52, type: 3}
 --- !u!222 &155390213
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -485,9 +488,9 @@ RectTransform:
   m_Father: {fileID: 155390211}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -240, y: -150}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -200}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &590902039
@@ -557,18 +560,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 012729ae7256111469669cce1036c44a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _TargetSpeed: 200
-  _BananaSpeed: 500
   _Target: {fileID: 155390209}
   _BananaObject: {fileID: 1644094473}
   _TargetLeftOriginalPosition: {x: -1000, y: 0, z: 0}
-  _TargetRightOriginalPosition: {x: 1000, y: 0, z: 0}
-  _TargetLeftDestination: {x: 1000, y: 0, z: 0}
+  _TargetRightOriginalPosition: {x: 800, y: 0, z: 0}
+  _TargetLeftDestination: {x: 800, y: 0, z: 0}
   _TargetRightDestination: {x: -1000, y: 0, z: 0}
   _BananaDestination: {x: 0, y: 0, z: 0}
   _Score: 1000
-  mSuccess: {fileID: 0}
-  mThrow: {fileID: 0}
+  mHit: {fileID: 8300000, guid: 6111d506e28a02e49975bb1e534e15de, type: 3}
+  mSuccess: {fileID: 8300000, guid: 70987b598d5465149b8b08ac1c2f54d8, type: 3}
+  mFail: {fileID: 8300000, guid: 800263f557a905c4d96dc5123830855f, type: 3}
+  mThrow1: {fileID: 8300000, guid: 4e264ad0199b9fb4db03dbe5fd749804, type: 3}
+  mThrow2: {fileID: 8300000, guid: a9a7bac5abe7bbe4a850c14ecb06ede8, type: 3}
   mView: {fileID: 1786038934705043762}
   mCanvas: {fileID: 1083381652}
 --- !u!4 &595062737
@@ -941,9 +945,9 @@ RectTransform:
   m_Father: {fileID: 155390211}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -150, y: -150}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -200}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1103675564
@@ -1204,7 +1208,7 @@ MonoBehaviour:
   arrow: {fileID: 8048417093799643297}
   hitZone: {fileID: 3436970085484377411}
   rangeOfHitZone: 50
-  positionYOfHitZone: 140
+  positionYOfHitZone: 120
   newArrowPosY: 0
   startOnAwake: 1
   IsDev: 0
