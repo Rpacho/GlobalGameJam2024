@@ -18,7 +18,9 @@ public class PlayerManager : MonoBehaviour
         else
             mInstance = this;
         DontDestroyOnLoad(gameObject);
+
         GlobalEvent.OnChangedScore.AddListener(AddScore);
+
     }
 
     public int Score { get { return mGameData.Score; } }
