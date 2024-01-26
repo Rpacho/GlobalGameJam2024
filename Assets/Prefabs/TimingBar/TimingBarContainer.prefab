@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 50.00006, y: -142.29999}
+  m_AnchoredPosition: {x: 51.400085, y: -142.29993}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0, y: 0.44}
 --- !u!222 &8651618772381807150
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.990566, g: 0.41585082, b: 0.41585082, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -187,8 +187,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -181.4}
-  m_SizeDelta: {x: 34, y: 31.7}
+  m_AnchoredPosition: {x: -0.264, y: -181.4}
+  m_SizeDelta: {x: 41.922, y: 31.7}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &4938960350718083331
 CanvasRenderer:
@@ -326,4 +326,5 @@ MonoBehaviour:
   rangeOfHitZone: 50
   positionYOfHitZone: 140
   newArrowPosY: 0
+  startOnAwake: 1
   IsDev: 0

@@ -13,7 +13,6 @@ public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager mInstance;
     public static PlayerManager Instance { get { return mInstance; } }
-
     private void Awake()
     {
         ResetData();
@@ -106,6 +105,7 @@ public class PlayerManager : MonoBehaviour
     IEnumerator WaitForSec()
     {
         yield return new WaitForSeconds(1f);
+
         SceneManager.LoadScene("Result");
     }
     

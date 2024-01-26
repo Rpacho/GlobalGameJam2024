@@ -2,6 +2,7 @@
 using PoguScripts.Scene;
 using PoguScripts.Scriptable;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PoguScripts.functions
 {
@@ -26,6 +27,11 @@ namespace PoguScripts.functions
 
         public void LoadNextScene()
         {
+            if (gameData.Life <= 0)
+            {
+                SceneManager.LoadScene("GameOverScene");
+                return;
+            }
             _sceneController?.LoadRandomScene();
         }
     }
