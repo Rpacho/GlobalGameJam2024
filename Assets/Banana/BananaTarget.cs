@@ -2,22 +2,23 @@ using PoguScripts.GlobalEvents;
 using PoguScripts.UI.TimingBarUI;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BananaTarget : MonoBehaviour
 {
-    [SerializeField]
-    private float mDistToSlide = 0.5f;
+    public AudioClip _RunningClip;
+    public AudioClip _Slip1;
+    public AudioClip _Slip2;
+
+    public AudioClip _HitClip;
 
     private Image mLeftRenderer;
     private Image mRightRenderer;
     private BananaMiniGame mGame;
-    private GameObject mBanana;
-    private float _Speed = 0.0f;
+    private bool isLeft = false;
     private bool _Running = false;
-    private bool _isThrow = false;
-    private bool _isFailed = false;
     private Vector2 _Dest = Vector2.zero;
     private Vector2 _Start = Vector2.zero;
 
@@ -25,53 +26,57 @@ public class BananaTarget : MonoBehaviour
 
     TimingBarView mTimingBarView;
 
-    public void Initialize(TimingBarView view, BananaMiniGame game, float speed, Vector2 startPos, Vector2 destPos)
+    public void Initialize(TimingBarView view, BananaMiniGame game, Vector2 startPos, Vector2 destPos)
     {
         mTimingBarView = view;
         mGame = game;
-        mBanana = game._BananaObject;
-        _Speed = startPos.x > destPos.x ? -speed : speed;
-        _Start = startPos;
-        transform.position = startPos;
+        _Start = transform.localPosition = startPos;
         _Dest = destPos;
-        _isThrow = false;
         _Running = false;
-        _isFailed = false;
-        gameObject.transform.Find("Left").localPosition = startPos.x > destPos.x ? new Vector3(-250, -150, 0) : new Vector3(150, -150, 0);
-        gameObject.transform.Find("Right").localPosition = startPos.x > destPos.x ? new Vector3(-150, -150, 0) : new Vector3(250, -150, 0);
+        isLeft = startPos.x > destPos.x;
         mLeftRenderer = transform.Find("Left").GetComponent<Image>();
         mRightRenderer = transform.Find("Right").GetComponent<Image>();
         mAnimator = GetComponent<Animator>();
+        ChangeDirection();
 
-        mLeftRenderer.transform.rotation = startPos.x > destPos.x ? new Quaternion(0,0,0,1.0f) : new Quaternion(0, 180, 0, 1.0f);
-        mRightRenderer.transform.rotation = startPos.x > destPos.x ? new Quaternion(0,0,0,1.0f) : new Quaternion(0, 180, 0, 1.0f);
-        Debug.Log(startPos.x > destPos.x ? "Left" : "Right");
         game.mGameStartAction += StartMovement;
     }
 
     public void StartMovement()
     {
+        //_RunningClip
         _Running = true;
         mAnimator.SetBool("isWalk", _Running);
     }
-
-    public void Call()
-    {
-        Debug.Log("Call");
-        _isThrow = true;
-    }
-
+    
     void FixedUpdate()
     {
         if(_Running)
         {
-            transform.localPosition = new Vector3(Mathf.Lerp(_Start.x, _Dest.x, Time.deltaTime * mTimingBarView.newArrowPosY),0,0);
+            transform.localPosition = new Vector3(Mathf.Lerp(_Start.x, _Dest.x, Mathf.PingPong(mTimingBarView.newArrowPosY * Time.deltaTime / 5.0f, 1800.0f)), 0, 0);
+
+            if (transform.localPosition.x >= 700)
+            {
+                Debug.Log("Right");
+                isLeft = false;
+                ChangeDirection();
+            }
+
+            if (transform.localPosition.x <= -700)
+            {
+                Debug.Log("Left");
+                isLeft = true;
+                ChangeDirection();
+            }
         }
     }
 
-    public bool IsRunning()
+    private void ChangeDirection()
     {
-        return _Running;
+        mLeftRenderer.transform.rotation = isLeft ? new Quaternion(0, 180, 0, 1.0f) : new Quaternion(0, 0, 0, 1.0f);
+        mRightRenderer.transform.rotation = isLeft ? new Quaternion(0, 180, 0, 1.0f) : new Quaternion(0, 0, 0, 1.0f);
+        gameObject.transform.Find("Left").localPosition = isLeft ? new Vector3(150, -150, 0) : new Vector3(-100, -150, 0);
+        gameObject.transform.Find("Right").localPosition = isLeft ? new Vector3(200, -150, 0) : new Vector3(-150, -150, 0);
     }
 
     private void OnEnable()
@@ -89,12 +94,13 @@ public class BananaTarget : MonoBehaviour
         mAnimator.SetBool("isWalk", false);
         mAnimator.SetTrigger("Fall");
         _Running = false;
+        // _HitClip
+        // Stop Running Clip
     }
 
 
     private void NotTouched()
     {
-        _isFailed = true;
         mGame.Touch(false);
     }
 
