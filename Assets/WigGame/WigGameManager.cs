@@ -24,6 +24,11 @@ public class WigGameManager : MonoBehaviour
     public bool failed = false;
     public bool success = false;
 
+    public List<AudioClip> wigMoveClipList;
+    public List<AudioClip> fanClipList;
+    public AudioClip wigFallClip;
+    public AudioClip cryingClip;
+    public AudioClip panicClip;
     private void Start()
     {
         clickCount = 0;
@@ -39,6 +44,8 @@ public class WigGameManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                PlayerManager.Instance.PlaySFX(fanClipList[Random.Range(0,fanClipList.Count)]);
+                PlayerManager.Instance.PlaySFX(wigMoveClipList[Random.Range(0,wigMoveClipList.Count)]);
                 clickCount++;
                 if (clickCount >= maxClickCount && elapsedTime <= timeLimit)
                 {
@@ -48,6 +55,8 @@ public class WigGameManager : MonoBehaviour
                     // AddScore(1 * difficultyScoreBonusModifier);
                     success = true;
                     Debug.Log("Success!");
+                    PlayerManager.Instance.PlaySFX(cryingClip);
+                    PlayerManager.Instance.PlaySFX(wigFallClip);
                 }
                 else
                 {
@@ -60,6 +69,12 @@ public class WigGameManager : MonoBehaviour
                 if (clickCount < maxClickCount)
                 {
                     wig.state = WigCharacter.WigState.blowing;
+                    
+                }
+
+                if (clickCount == 2)
+                {
+                    PlayerManager.Instance.PlaySFX(panicClip);
                 }
             }
             if (Input.GetKeyUp(KeyCode.Space))

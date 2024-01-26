@@ -48,9 +48,8 @@ public class BananaMiniGame : MonoBehaviour
     [SerializeField]
     private AudioClip mFail;
     [SerializeField]
-    private AudioClip mThrow1;  
-    [SerializeField]
-    private AudioClip mThrow2;
+    private List<AudioClip> mThrowList;
+
     private bool isShooted = false;
     private bool isLeft = false;
     private Animator mMonkeyAnimator;
@@ -154,6 +153,7 @@ public class BananaMiniGame : MonoBehaviour
     public void PlayAudioThrowBanana()
     {
         // Play Throw
+        PlayerManager.Instance.PlaySFX(mThrowList[Random.Range(0,mThrowList.Count)]);
     }
 
     public void Touch(bool touch)
@@ -162,10 +162,12 @@ public class BananaMiniGame : MonoBehaviour
         if (touch)
         {
             // Play Monkey Laugh SFX
+            PlayerManager.Instance.PlaySFX(mSuccess);
         }
         else
         {
             // Play Human Laugh Sfx
+            PlayerManager.Instance.PlaySFX(mFail);
         }
     }
 

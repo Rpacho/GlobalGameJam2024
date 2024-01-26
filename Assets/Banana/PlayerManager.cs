@@ -3,6 +3,7 @@ using PoguScripts.GlobalEvents;
 using PoguScripts.Scriptable;
 using System.Collections;
 using System.Collections.Generic;
+using PoguScripts.Audion;
 using PoguScripts.Enums;
 using TMPro;
 using UnityEngine;
@@ -12,9 +13,11 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager mInstance;
+    private AudioSFX _audioSfx;
     public static PlayerManager Instance { get { return mInstance; } }
     private void Awake()
     {
+        _audioSfx = GetComponent<AudioSFX>();
         ResetData();
         if (mInstance != null && mInstance != this)
             Destroy(gameObject);
@@ -24,6 +27,11 @@ public class PlayerManager : MonoBehaviour
 
     }
 
+    public void StopSFX() => _audioSfx.Stop();
+    public void PlaySFX(AudioClip clip, float delay = 0)
+    {
+        _audioSfx.PlayAudioClip(clip, delay);
+    }
     private void OnEnable()
     {
         GlobalEvent.OnHit.AddListener(delegate { GainScoreEachRound();
@@ -104,8 +112,8 @@ public class PlayerManager : MonoBehaviour
 
     IEnumerator WaitForSec()
     {
-        yield return new WaitForSeconds(1f);
-
+        yield return new WaitForSeconds(1.5f);
+        StopSFX();
         SceneManager.LoadScene("Result");
     }
     

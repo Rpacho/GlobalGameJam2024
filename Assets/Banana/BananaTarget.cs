@@ -8,11 +8,10 @@ using UnityEngine.UI;
 
 public class BananaTarget : MonoBehaviour
 {
-    public AudioClip _RunningClip;
-    public AudioClip _Slip1;
-    public AudioClip _Slip2;
+    public List<AudioClip> walkingAudioClips = new List<AudioClip>();
+    public List<AudioClip> _SlipList;
 
-    public AudioClip _HitClip;
+    public List<AudioClip> _HitClip;
 
     private Image mLeftRenderer;
     private Image mRightRenderer;
@@ -45,6 +44,7 @@ public class BananaTarget : MonoBehaviour
     public void StartMovement()
     {
         //_RunningClip
+        PlayerManager.Instance.PlaySFX(walkingAudioClips[Random.Range(0,walkingAudioClips.Count)]);
         _Running = true;
         mAnimator.SetBool("isWalk", _Running);
     }
@@ -94,10 +94,19 @@ public class BananaTarget : MonoBehaviour
         mAnimator.SetBool("isWalk", false);
         mAnimator.SetTrigger("Fall");
         _Running = false;
+        PlayerManager.Instance.StopSFX();
         // _HitClip
+        PlayerManager.Instance.PlaySFX(_HitClip[Random.Range(0,_HitClip.Count)]);
         // Stop Running Clip
+        PlayerManager.Instance.PlaySFX(_SlipList[Random.Range(0,_SlipList.Count)]);
+        // StartCoroutine(DelayPlaySFX());
     }
 
+    // IEnumerator DelayPlaySFX()
+    // {
+    //     yield return new WaitForSeconds(0.01f);
+    //     
+    // }
 
     private void NotTouched()
     {
