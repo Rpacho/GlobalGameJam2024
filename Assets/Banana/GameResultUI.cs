@@ -20,8 +20,8 @@ public class GameResultUI : MonoBehaviour
     private void Start()
     {
         isGameOver = isInitialized = false;
-        mScoreBar = transform.Find("Panel").Find("Score").GetComponent<TextMeshProUGUI>();
-        mGameResultBar = transform.Find("Panel").Find("Result").GetComponent<TextMeshProUGUI>();
+        // mScoreBar = transform.Find("Panel").Find("Score").GetComponent<TextMeshProUGUI>();
+        // mGameResultBar = transform.Find("Panel").Find("Result").GetComponent<TextMeshProUGUI>();
         mTimer = transform.Find("Timer").GetComponent<Timer>();
 
         UpdateHealth();
@@ -73,14 +73,14 @@ public class GameResultUI : MonoBehaviour
     {
         if (PlayerManager.Instance == null)
             return;
-        mScoreBar.text = PlayerManager.Instance.Score.ToString();
+        // mScoreBar.text = PlayerManager.Instance.Score.ToString();
     }
 
     private void UpdateResult()
     {
         if (PlayerManager.Instance == null)
             return;
-        mGameResultBar.text = (PlayerManager.Instance.isGameWon) ? "Win!" : (PlayerManager.Instance.Life == 0) ? "Game Over!" : "Lose!";
+        // mGameResultBar.text = (PlayerManager.Instance.isGameWon) ? "Win!" : (PlayerManager.Instance.Life == 0) ? "Game Over!" : "Lose!";
     }
 
     private void Result()

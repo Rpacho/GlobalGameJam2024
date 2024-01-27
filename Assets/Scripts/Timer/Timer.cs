@@ -1,13 +1,15 @@
+using System;
 using PoguScripts.Scriptable;
 using System.Collections;
 using System.Collections.Generic;
 using PoguScripts.GlobalEvents;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public static UnityEvent OnTimesUp = new UnityEvent(); //called once only when elapsedTime becomes bigger than timeLmit
+    public UnityEvent OnTimesUp = new UnityEvent(); //called once only when elapsedTime becomes bigger than timeLmit
     public GameData gameData;
     [SerializeField]
     public float timeLimit = 5; //Measured in seconds
@@ -16,23 +18,76 @@ public class Timer : MonoBehaviour
     [SerializeField()]
     public bool timesUp { get; private set; }
 
+    public Sprite greenBarSprite;
+    public Sprite yellowBarSprite;
+    public Sprite redBarSprite;
+
+    public GameObject fillObject;
+    private RectTransform fillRect;
+    private Image fillImage;
+    private float yellowCapPerc = 0.3f;
+    private float redCapPerc = 0.7f;
+    private float yellowCapTimeStamp = 0f;
+    private float redCapPercTimeStamp = 0f;
+
+    private bool isGreen = true;
+    private bool isYellow = false;
+    private bool isRed = false;
+    private float totalWidth;
+    private float currentWidth;
     [SerializeField]
     private float elapsedTime;
+
+    public bool enableBroadcast = true;
     private void Start()
     {
+        fillRect = fillObject.GetComponent<RectTransform>();
+        totalWidth = fillRect.rect.width;
+        currentWidth = totalWidth;
+        fillImage = fillObject.GetComponent<Image>();
+
+        yellowCapTimeStamp = timeLimit * yellowCapPerc;
+        redCapPercTimeStamp = timeLimit * redCapPerc;
+        
         GlobalEvent.OnHit.AddListener(OnEventHit);
         GlobalEvent.OnMiss.AddListener(OnEventMiss);
     }
 
+    private void OnDestroy()
+    {
+        GlobalEvent.OnHit.RemoveListener(OnEventHit);
+        GlobalEvent.OnMiss.RemoveListener(OnEventMiss);
+    }
+
     private void Update()
     {
+        float timerElapse = elapsedTime / timeLimit;
+        
+        currentWidth = totalWidth * timerElapse;
+            
+        fillRect.sizeDelta = new Vector2(totalWidth - currentWidth, fillRect.sizeDelta.y);
+        
         if(!pause && elapsedTime < timeLimit)
         {
             elapsedTime += gameData.GameSpeed * Time.deltaTime;
+
+            if (elapsedTime > yellowCapTimeStamp && isYellow == false)
+            {
+                isYellow = true;
+                fillImage.sprite = yellowBarSprite;
+            }
+                
+            if (elapsedTime > redCapPercTimeStamp && isRed == false)
+            {
+                isRed = true;
+                fillImage.sprite = redBarSprite;
+            }
             if(!timesUp && elapsedTime > timeLimit)
             {
                 timesUp = true;
                 OnTimesUp.Invoke();
+                if(enableBroadcast)
+                    GlobalEvent.OnMiss.Invoke();
                 Pause();
                 Debug.Log("[" + gameObject.name + "]" + "Times up!");
             }

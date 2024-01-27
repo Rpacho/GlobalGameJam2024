@@ -47,7 +47,7 @@ public class WigGameManager : MonoBehaviour
                 PlayerManager.Instance.PlaySFX(fanClipList[Random.Range(0,fanClipList.Count)]);
                 PlayerManager.Instance.PlaySFX(wigMoveClipList[Random.Range(0,wigMoveClipList.Count)]);
                 clickCount++;
-                if (clickCount >= maxClickCount && elapsedTime <= timeLimit)
+                if (clickCount >= maxClickCount)
                 {
                     character.state = WigCharacter.WigState.blown;
                     wig.state = WigCharacter.WigState.blown;
@@ -109,18 +109,18 @@ public class WigGameManager : MonoBehaviour
 
     private void CalcualteTime()
     {
-        if(success) { return; }
-        if (!failed)
-        {
-            elapsedTime += gameData.GameSpeed * Time.deltaTime;
-        }
-        if(elapsedTime > timeLimit && !failed && !success)
-        {
-            GlobalEvent.OnMiss.Invoke();
-            // LoseLife();
-            failed = true;
-            Debug.Log("Failed!");
-        }
+        // if(success) { return; }
+        // if (!failed)
+        // {
+        //     elapsedTime += gameData.GameSpeed * Time.deltaTime;
+        // }
+        // if(elapsedTime > timeLimit && !failed && !success)
+        // {
+        //     GlobalEvent.OnMiss.Invoke();
+        //     // LoseLife();
+        //     failed = true;
+        //     Debug.Log("Failed!");
+        // }
     }
 
     // private void AddScore(int score)
