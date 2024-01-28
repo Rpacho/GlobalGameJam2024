@@ -113,6 +113,11 @@ public class Timer : MonoBehaviour
         return timeRemaining;
     }
 
+    public float GetElapsedTime()
+    {
+        return elapsedTime;
+    }
+
     /// <summary>
     /// Pause the timer.
     /// </summary>
