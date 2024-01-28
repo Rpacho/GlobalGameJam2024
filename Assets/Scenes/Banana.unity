@@ -1237,13 +1237,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15f5261301cb42ac97bdd09574587296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrowSpeed: 300
+  arrowSpeed: 100
   rangeOfArrow: 0.01
   spacePressed: 0
   gameData: {fileID: 11400000, guid: 811f68cfc0d5e7345ba5a77a8185f2ca, type: 2}
   arrow: {fileID: 8048417093799643297}
   hitZone: {fileID: 3436970085484377411}
-  rangeOfHitZone: 50
+  rangeOfHitZone: 60
   positionYOfHitZone: 120
   newArrowPosY: 0
   startOnAwake: 1

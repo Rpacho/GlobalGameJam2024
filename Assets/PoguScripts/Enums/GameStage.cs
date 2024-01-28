@@ -5,6 +5,7 @@
         NONE,
         THROW_BANANA,
         BLOW_WIG,
-        FEATHER_GIGGLE
+        FEATHER_GIGGLE,
+        NOSE_PICK
     }
 }

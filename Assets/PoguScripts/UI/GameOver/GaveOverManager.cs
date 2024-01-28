@@ -18,6 +18,7 @@ namespace PoguScripts.UI.GameOver
 
         private void Awake()
         {
+            PlayerManager.Instance.BGMReset();
             isNewBestScore = gameData.Score > scoreData.bestScore;
             if(isNewBestScore)
                 newBestScore.SetActive(true);
@@ -28,6 +29,7 @@ namespace PoguScripts.UI.GameOver
 
         public void ReturnToTitle()
         {
+            PlayerManager.Instance.ResetData();
             SceneManager.LoadScene("MainScene");
         }
     }

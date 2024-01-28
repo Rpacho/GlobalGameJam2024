@@ -18,6 +18,8 @@ public class Timer : MonoBehaviour
     [SerializeField()]
     public bool timesUp { get; private set; }
 
+    public bool enable = true;
+
     public Sprite greenBarSprite;
     public Sprite yellowBarSprite;
     public Sprite redBarSprite;
@@ -41,6 +43,7 @@ public class Timer : MonoBehaviour
     public bool enableBroadcast = true;
     private void Start()
     {
+        if (enable == false) return;
         fillRect = fillObject.GetComponent<RectTransform>();
         totalWidth = fillRect.rect.width;
         currentWidth = totalWidth;
@@ -86,8 +89,12 @@ public class Timer : MonoBehaviour
             {
                 timesUp = true;
                 OnTimesUp.Invoke();
-                if(enableBroadcast)
-                    GlobalEvent.OnMiss.Invoke();
+                if (enableBroadcast)
+                {
+                    PlayerManager.Instance.Defeat();
+                    PlayerManager.Instance.LoadResultSceneForce();
+                }
+                    
                 Pause();
                 Debug.Log("[" + gameObject.name + "]" + "Times up!");
             }

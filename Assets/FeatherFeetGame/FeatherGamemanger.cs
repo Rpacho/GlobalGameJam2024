@@ -17,6 +17,12 @@ public class FeatherGamemanger : MonoBehaviour
     public Vector3 knockbackForce;
     private bool failed;
     private bool success;
+
+    public AudioClip featherClip;
+
+    public AudioClip squishClip;
+
+    public List<AudioClip> stomp;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +38,7 @@ public class FeatherGamemanger : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 GlobalEvent.OnClickedSpace.Invoke();
+                PlayerManager.Instance?.PlaySFX(featherClip);
                 if (tickleCooldown.cooldownReady)
                 {
                     if (feather.correctTiming && !gameoverCollider.gameOver && !success && !failed) //Hit!
@@ -71,6 +78,8 @@ public class FeatherGamemanger : MonoBehaviour
 
     public void PlayDeathScene()
     {
+        PlayerManager.Instance?.PlaySFX(stomp[Random.Range(0,stomp.Count)]);
+        PlayerManager.Instance?.PlaySFX(squishClip);
         feather.gameObject.SetActive(false);
         feet.gameObject.SetActive(false);
         shadow.SetActive(false);

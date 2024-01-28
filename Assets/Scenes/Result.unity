@@ -319,8 +319,8 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FalloffIntensity: 0.738
+  m_Color: {r: 1, g: 0.9260402, b: 0.495283, a: 1}
   m_Intensity: 0.63
   m_LightVolumeIntensity: 1.59
   m_LightVolumeIntensityEnabled: 1
@@ -340,8 +340,8 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 106.56
-  m_PointLightOuterAngle: 106.56
+  m_PointLightInnerAngle: 31.78
+  m_PointLightOuterAngle: 131.95392
   m_PointLightInnerRadius: 0
   m_PointLightOuterRadius: 11.034499
   m_ShapeLightParametricSides: 5
@@ -362,7 +362,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397541593}
   m_LocalRotation: {x: 0, y: 0, z: 0.9998391, w: -0.017938428}
-  m_LocalPosition: {x: -0.31, y: 5.28, z: 0}
+  m_LocalPosition: {x: -5.06, y: 4.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -600,6 +600,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3151957179011429239, guid: c61dcdaa648af384280577017b026feb, type: 3}
+      propertyPath: sceneNames.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151957179011429239, guid: c61dcdaa648af384280577017b026feb, type: 3}
+      propertyPath: sceneNames.Array.data[3].gameStage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151957179011429239, guid: c61dcdaa648af384280577017b026feb, type: 3}
+      propertyPath: sceneNames.Array.data[3].sceneName
+      value: NosePick
+      objectReference: {fileID: 0}
     - target: {fileID: 5781858315765079261, guid: c61dcdaa648af384280577017b026feb, type: 3}
       propertyPath: m_Name
       value: SceneLoader
@@ -1213,6 +1225,10 @@ PrefabInstance:
     - target: {fileID: 3847236489704290235, guid: dc498670905df7d49913dd40d3172ff5, type: 3}
       propertyPath: m_Name
       value: TimerUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 3847236489704290235, guid: dc498670905df7d49913dd40d3172ff5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4690705401837420295, guid: dc498670905df7d49913dd40d3172ff5, type: 3}
       propertyPath: timeLimit
@@ -1836,6 +1852,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1899717759
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1899717761}
+  - component: {fileID: 1899717760}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1899717760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899717759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4069252b8fa4e71932d06eed8a6212d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameData: {fileID: 11400000, guid: 811f68cfc0d5e7345ba5a77a8185f2ca, type: 2}
+  text: 
+  gameSpeedIncrease: 0.2
+  multiplier: 1
+--- !u!4 &1899717761
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899717759}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2002334831
 GameObject:
