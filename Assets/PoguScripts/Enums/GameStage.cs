@@ -6,6 +6,7 @@
         THROW_BANANA,
         BLOW_WIG,
         FEATHER_GIGGLE,
-        NOSE_PICK
+        NOSE_PICK,
+        SNIFF_SNOT
     }
 }

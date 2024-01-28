@@ -16,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     private AudioSFX _audioSfx;
     public static PlayerManager Instance { get { return mInstance; } }
     public AudioSource bgm;
+    public int playerRounds = 0;
     private void Awake()
     {
         _audioSfx = GetComponent<AudioSFX>();
@@ -69,6 +70,7 @@ public class PlayerManager : MonoBehaviour
 
     public void AddScore(int score)
     {
+        playerRounds++;
         if(mGameData != null)
         {
             mGameData.Score += score;
@@ -78,6 +80,7 @@ public class PlayerManager : MonoBehaviour
 
     public void Defeat()
     {
+        playerRounds++;
         if (mGameData == null)
             return;
         if (mGameData.Life >= 1)
@@ -100,6 +103,8 @@ public class PlayerManager : MonoBehaviour
         {
             progression.Reset();
         }
+
+        playerRounds = 0;
     }
 
     public void BGMReset()
@@ -140,4 +145,21 @@ public class PlayerManager : MonoBehaviour
     {
         bgm.pitch += 0.1f;
     }
+
+    private float musicVolumeWhenStartGame = 0.65f;
+    public void SetVolumeDownMusic()
+    {
+        // float minus = (float)(mGameData.Volume * musicVolumeWhenStartGame);
+        // float volume = mGameData.Volume - minus;
+        // _audioSfx._audioMixer.SetFloat("Music", Mathf.Log10((volume)) * 20);
+    }
+
+    public void SetVolumeUpMusic()
+    {
+        // float minus = (float)(mGameData.Volume * musicVolumeWhenStartGame);
+        // float volume = mGameData.Volume + minus;
+        // _audioSfx._audioMixer.SetFloat("Music", Mathf.Log10((volume)) * 20);
+    }
+    
+    
 }

@@ -15,10 +15,12 @@ namespace PoguScripts.functions
         public float limit = 100;
         private Transform destination;
         public bool enable = true;
+        
         private void Awake()
         {
             destination = leftDestination;
             transform.position = new Vector3(destination.position.x, destination.position.y, destination.position.z);
+           
         }
 
         private void Update()

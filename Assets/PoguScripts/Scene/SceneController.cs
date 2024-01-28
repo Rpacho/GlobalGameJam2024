@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using PoguScripts.Enums;
 using PoguScripts.Scriptable;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -16,9 +17,23 @@ namespace PoguScripts.Scene
 
         [SerializeField] private GameData _gameData;
         public bool loadSceneOnStart = false;
-
+        private int nextSceneIndex = 0;
+        public TextMeshProUGUI textSceneName;
+        public List<string> gameName;
+        public SpriteRenderer renderer;
         private IEnumerator Start()
         {
+            GameStage prevSceneIndex = _gameData.CurrentGameStage;
+            nextSceneIndex = GetRandomSceneIndex();
+            do
+            {
+                nextSceneIndex = GetRandomSceneIndex();
+                Debug.Log(nextSceneIndex);
+                Debug.Log(prevSceneIndex != sceneNames[nextSceneIndex].gameStage);
+            } while (prevSceneIndex == sceneNames[nextSceneIndex].gameStage);
+
+            renderer.sprite = sceneNames[nextSceneIndex].sprite;
+            textSceneName.text = sceneNames[nextSceneIndex].gameName;
             yield return new WaitForSeconds(2f);
             if(loadSceneOnStart)
                 LoadRandomScene();
@@ -27,15 +42,6 @@ namespace PoguScripts.Scene
         public void LoadRandomScene()
         {
             // make sure you don't load scene twice in a row
-            GameStage prevSceneIndex = _gameData.CurrentGameStage;
-            int nextSceneIndex = GetRandomSceneIndex();
-            do
-            {
-                nextSceneIndex = GetRandomSceneIndex();
-                Debug.Log(nextSceneIndex);
-                Debug.Log(prevSceneIndex != sceneNames[nextSceneIndex].gameStage);
-            } while (prevSceneIndex == sceneNames[nextSceneIndex].gameStage);
-
             _gameData.CurrentGameStage = sceneNames[nextSceneIndex].gameStage;
             SceneManager.LoadScene(sceneNames[nextSceneIndex].sceneName);
         }
@@ -50,5 +56,7 @@ namespace PoguScripts.Scene
     {
         public GameStage gameStage;
         public string sceneName;
+        public string gameName;
+        public Sprite sprite;
     }
 }

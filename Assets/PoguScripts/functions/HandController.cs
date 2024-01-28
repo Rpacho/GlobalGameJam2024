@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using PoguScripts.GlobalEvents;
 using PoguScripts.Scriptable;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace PoguScripts.functions
 {
@@ -15,10 +17,14 @@ namespace PoguScripts.functions
 
         public GameObject angryFace;
         public GameObject flincFace;
+        public AudioSource source;
+        public List<AudioClip> pokeHitList = new List<AudioClip>();
+        public AudioClip pokeMiss;
         private void Start()
         {
             animator = GetComponent<Animator>();
             _handMover = GetComponent<HandMover>();
+            source.Play();
         }
 
         private void Update()
@@ -35,6 +41,7 @@ namespace PoguScripts.functions
             _handMover.enable = false;
             PlayAnimation();
             timer.Pause();
+            source.Stop();
         }
 
         private void PlayAnimation()
@@ -59,11 +66,13 @@ namespace PoguScripts.functions
         public void SetHit()
         {
             isHit = true;
+            PlayerManager.Instance?.PlaySFX(pokeHitList[Random.Range(0, pokeHitList.Count)]);
         }
 
         public void SetFlichFace()
         {
             flincFace?.SetActive(true);
+            PlayerManager.Instance?.PlaySFX(pokeMiss);
         }
     }
 }

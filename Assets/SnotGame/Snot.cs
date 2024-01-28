@@ -1,8 +1,10 @@
+using System;
 using PoguScripts.GlobalEvents;
 using PoguScripts.Scriptable;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Snot : MonoBehaviour
 {
@@ -12,12 +14,30 @@ public class Snot : MonoBehaviour
     public bool won = false;
     public float sniffspeed = 3.0f;
     private Vector3 scale;
+    public AudioClip happyClip;
+    public AudioClip sob;
+    public List<AudioClip> cry;
     private void Start()
     {
         GlobalEvent.OnHit.AddListener(OnTimeHit);
+        GlobalEvent.OnMiss.AddListener(OnTimeMiss);
         scale = Vector3.one;
         scale.y = 0.0f;
+        PlayerManager.Instance.PlaySFX(cry[Random.Range(0,cry.Count)]);
     }
+
+    private void OnTimeMiss()
+    {
+        PlayerManager.Instance?.StopSFX();
+        PlayerManager.Instance?.PlaySFX(sob);
+    }
+
+    private void OnDestroy()
+    {
+        GlobalEvent.OnHit.RemoveListener(OnTimeHit);
+        GlobalEvent.OnMiss.RemoveListener(OnTimeMiss);
+    }
+
     public void FixedUpdate()
     {
         if(start && !won)
@@ -41,6 +61,8 @@ public class Snot : MonoBehaviour
 
     public void OnTimeHit()
     {
+        PlayerManager.Instance?.StopSFX();
+        PlayerManager.Instance?.PlaySFX(happyClip);
         won = true;
     }
 }

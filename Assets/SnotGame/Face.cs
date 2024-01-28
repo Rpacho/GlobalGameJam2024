@@ -31,13 +31,13 @@ public class Face : MonoBehaviour
     {
         sr.sprite = sprites[1];
         if(won) { return; }
-        gameData.Score += 1;
+        // gameData.Score += 1;
         won = true;
     }
 
     public void OnTimeMiss()
     {
         sr.sprite = sprites[2];
-        gameData.Life -= 1;
+        // gameData.Life -= 1;
     }
 }

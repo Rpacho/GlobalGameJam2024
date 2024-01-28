@@ -10,7 +10,7 @@ namespace PoguScripts.Audion
     {
         private AudioSource _audioSource;
         [SerializeField]
-        private AudioMixer _audioMixer;
+        public AudioMixer _audioMixer;
         public List<AudioData> audioList;
 
         public void PlayAudioUsingKey(string key)

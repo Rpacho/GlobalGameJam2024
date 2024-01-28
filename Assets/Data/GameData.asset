@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   lifePoints: 3
-  scorePoints: 100
+  scorePoints: 0
   gameSpeed: 1
   volumeValue: 1
-  currentGameState: 3
+  currentGameState: 4
   gameProgressions:
   - isComplete: 0
     message: Lets Speed Up A Little Bit
@@ -49,4 +49,4 @@ MonoBehaviour:
     message: IMPOSSIBLE!!!!!!!!!!!!
     scoreLimit: 6000
   prevLifePoints: 3
-  prevScore: 0
+  prevScore: 602

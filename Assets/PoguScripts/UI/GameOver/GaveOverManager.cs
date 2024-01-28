@@ -1,4 +1,5 @@
 ﻿using System;
+using PoguScripts.functions;
 using PoguScripts.Scriptable;
 using TMPro;
 using UnityEngine;
@@ -14,8 +15,7 @@ namespace PoguScripts.UI.GameOver
         public TextMeshProUGUI currentScore;
         public GameObject newBestScore;
         private bool isNewBestScore = false;
-
-
+        
         private void Awake()
         {
             PlayerManager.Instance.BGMReset();
@@ -25,10 +25,13 @@ namespace PoguScripts.UI.GameOver
             scoreData.Push(gameData.Score);
             bestScore.text = scoreData.bestScore.ToString();
             currentScore.text = gameData.Score.ToString();
+            
         }
+        
 
         public void ReturnToTitle()
         {
+            PlayerManager.Instance.SetVolumeUpMusic();
             PlayerManager.Instance.ResetData();
             SceneManager.LoadScene("MainScene");
         }

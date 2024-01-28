@@ -66,9 +66,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Vix - Audio/Composer
+  m_text: 'Vixcinity - Audio Director/Producer
 
-    Handle:'
+    prodby.vici'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5496a83d7117c204abdea5581aa106e9, type: 2}
   m_sharedMaterial: {fileID: -8647539572694958410, guid: 5496a83d7117c204abdea5581aa106e9, type: 2}
@@ -205,7 +205,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Programmer/Chef(still cooking)
 
-    Discord Handle:  @JimmyJimmy'
+    @JimmyJimmy'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5496a83d7117c204abdea5581aa106e9, type: 2}
   m_sharedMaterial: {fileID: -8647539572694958410, guid: 5496a83d7117c204abdea5581aa106e9, type: 2}
@@ -475,9 +475,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Sirena - 2D Artist
-
-    Handle:'
+  m_text: "Serena Nieves - Art Director\n @tinyterrorbb"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5496a83d7117c204abdea5581aa106e9, type: 2}
   m_sharedMaterial: {fileID: -8647539572694958410, guid: 5496a83d7117c204abdea5581aa106e9, type: 2}
@@ -577,13 +575,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5142101073758842532}
-  - {fileID: 4441069211611317282}
-  - {fileID: 7052608254235407643}
-  - {fileID: 7682304839752968951}
   - {fileID: 4581208569734345711}
-  - {fileID: 6212274897417534572}
   - {fileID: 2295922432679964290}
   - {fileID: 2417381259296147542}
+  - {fileID: 6212274897417534572}
+  - {fileID: 7052608254235407643}
+  - {fileID: 7682304839752968951}
+  - {fileID: 4441069211611317282}
   m_Father: {fileID: 3164643131611448841}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -613,7 +611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.84313726}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -640,6 +638,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3164643131611448841}
   - component: {fileID: 5719750025284858713}
+  - component: {fileID: 1781990093902606787}
   m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
@@ -689,6 +688,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1781990093902606787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4240978383103673907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc9091822d743cf986a70f806b15626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRunOnAwake: 0
 --- !u!1 &4305180059030031794
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,7 +769,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Programmer
 
-    Discord Handle: @LuckyToShoot'
+    @LuckyToShoot'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5496a83d7117c204abdea5581aa106e9, type: 2}
   m_sharedMaterial: {fileID: -8647539572694958410, guid: 5496a83d7117c204abdea5581aa106e9, type: 2}
@@ -892,9 +904,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Oscar - 2D Artist
+  m_text: 'Oscar Chu - 2D Artist/UI Designer
 
-    Handle: '
+    @OscarC'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5496a83d7117c204abdea5581aa106e9, type: 2}
   m_sharedMaterial: {fileID: -8647539572694958410, guid: 5496a83d7117c204abdea5581aa106e9, type: 2}
@@ -1029,9 +1041,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Veronica - 2D Artist
-
-    Handle:'
+  m_text: "Ver\xF3nica Hope - 2D Artist"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5496a83d7117c204abdea5581aa106e9, type: 2}
   m_sharedMaterial: {fileID: -8647539572694958410, guid: 5496a83d7117c204abdea5581aa106e9, type: 2}
@@ -1168,7 +1178,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Pogu Desu - Project Manager
 
-    Handle on X: @poguthis'
+    @pogudesu'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5496a83d7117c204abdea5581aa106e9, type: 2}
   m_sharedMaterial: {fileID: -8647539572694958410, guid: 5496a83d7117c204abdea5581aa106e9, type: 2}

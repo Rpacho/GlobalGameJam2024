@@ -21,6 +21,7 @@ namespace PoguScripts.functions
 
         private void StartGame()
         {
+            PlayerManager.Instance?.SetVolumeDownMusic();
             PlayerManager.Instance?.LoadResultScene();
         }
     }
