@@ -9,7 +9,11 @@ namespace PoguScripts.functions
     {
         public GameData gameData;
         private bool hasLostLife = false;
-        public List<Animator> HeartList; 
+        public List<Animator> HeartList;
+        public Animator Camera;
+        public GameObject alert;
+        public GameObject winAnimation;
+        public GameObject loseAnimation;
         private void Awake()
         {
             if (gameData.prevLifePoints > gameData.Life)
@@ -26,6 +30,13 @@ namespace PoguScripts.functions
             {
                 HeartList[gameData.prevLifePoints - 1].SetTrigger("Hide");
                 gameData.prevLifePoints = gameData.Life;
+                alert.SetActive(true);
+                Camera.SetTrigger("CameraShake");
+                loseAnimation?.SetActive(true);
+            }
+            else
+            {
+                winAnimation?.SetActive(true);
             }
         }
         

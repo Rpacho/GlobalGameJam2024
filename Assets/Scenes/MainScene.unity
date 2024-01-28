@@ -1699,6 +1699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2020603745}
   - component: {fileID: 2020603744}
+  - component: {fileID: 2020603746}
   m_Layer: 0
   m_Name: GiggleGalaxyTitleScreen
   m_TagString: Untagged
@@ -1714,7 +1715,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2020603743}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: a66211b50d4d891429911c239790740c, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: e8f07bf69ec0119499e3b02639e66b90, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 637800628}
@@ -1734,10 +1735,10 @@ VideoPlayer:
   m_EnabledAudioTracks: 
   m_DirectAudioMutes: 
   m_ControlledAudioTrackCount: 0
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 1
-  m_WaitForFirstFrame: 1
+  m_WaitForFirstFrame: 0
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
 --- !u!4 &2020603745
@@ -1755,6 +1756,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2020603746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020603743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e948d198f08845fabcee503d41851e68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  videoFileName: GiggleGalaxyTitleScreen.mp4
 --- !u!1001 &2039898003
 PrefabInstance:
   m_ObjectHideFlags: 0
