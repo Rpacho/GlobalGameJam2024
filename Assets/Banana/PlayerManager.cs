@@ -15,6 +15,7 @@ public class PlayerManager : MonoBehaviour
     private static PlayerManager mInstance;
     private AudioSFX _audioSfx;
     public static PlayerManager Instance { get { return mInstance; } }
+    public AudioSource bgm;
     private void Awake()
     {
         _audioSfx = GetComponent<AudioSFX>();
@@ -86,6 +87,7 @@ public class PlayerManager : MonoBehaviour
 
     public void ResetData()
     {
+        BGMReset();
         if (mGameData == null)
             return;
         mGameData.Life = 3;
@@ -93,6 +95,16 @@ public class PlayerManager : MonoBehaviour
         mGameData.prevScore = 0;
         mGameData.Score = 0;
         mGameData.CurrentGameStage = GameStage.NONE;
+        mGameData.GameSpeed = 1f;
+        foreach (var progression in mGameData.gameProgressions)
+        {
+            progression.Reset();
+        }
+    }
+
+    public void BGMReset()
+    {
+        bgm.pitch = 1f;
     }
 
     private void GainScoreEachRound()
@@ -100,10 +112,7 @@ public class PlayerManager : MonoBehaviour
         AddScore(100);
     }
 
-    private void OnDestroy()
-    {
 
-    }
 
     public void LoadResultScene()
     {
@@ -113,12 +122,22 @@ public class PlayerManager : MonoBehaviour
     IEnumerator WaitForSec()
     {
         yield return new WaitForSeconds(1.5f);
+        LoadResultSceneForce();
+    }
+
+    public void LoadResultSceneForce()
+    {
         StopSFX();
         SceneManager.LoadScene("Result");
     }
-    
+
     private void DecrementLife()
     {
         Defeat();
+    }
+
+    public void SetBGMSpeedUp()
+    {
+        bgm.pitch += 0.1f;
     }
 }

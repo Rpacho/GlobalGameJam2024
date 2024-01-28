@@ -12,10 +12,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aeeb19d358046c1b7812375b47acc49, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  lifePoints: 0
-  scorePoints: 1500
+  lifePoints: 3
+  scorePoints: 100
   gameSpeed: 1
   volumeValue: 1
-  currentGameState: 2
-  prevLifePoints: 0
-  prevScore: 1500
+  currentGameState: 3
+  gameProgressions:
+  - isComplete: 0
+    message: Lets Speed Up A Little Bit
+    scoreLimit: 500
+  - isComplete: 0
+    message: More Speed
+    scoreLimit: 800
+  - isComplete: 0
+    message: Even More Speed
+    scoreLimit: 1200
+  - isComplete: 0
+    message: Give Me More Speed
+    scoreLimit: 1500
+  - isComplete: 0
+    message: Speeeeeeeeeeed
+    scoreLimit: 1700
+  - isComplete: 0
+    message: MORE SPEEEEEEEEEED
+    scoreLimit: 2100
+  - isComplete: 0
+    message: EVEN MOOOORE SPEEEEEEED
+    scoreLimit: 2500
+  - isComplete: 0
+    message: CRAZY!!!!!
+    scoreLimit: 3500
+  - isComplete: 0
+    message: INSANE!!!!!
+    scoreLimit: 4500
+  - isComplete: 0
+    message: IMPOSSIBLE!!!!!!!!!!!!
+    scoreLimit: 6000
+  prevLifePoints: 3
+  prevScore: 0

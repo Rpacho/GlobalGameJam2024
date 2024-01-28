@@ -1,4 +1,6 @@
-﻿using PoguScripts.Enums;
+﻿using System;
+using System.Collections.Generic;
+using PoguScripts.Enums;
 using PoguScripts.GlobalEvents;
 using UnityEngine;
 
@@ -12,6 +14,7 @@ namespace PoguScripts.Scriptable
         [SerializeField]private float gameSpeed;
         [SerializeField]private float volumeValue;
         [SerializeField]private GameStage currentGameState = GameStage.NONE;
+        public List<GameProgressionData> gameProgressions = new List<GameProgressionData>();
 
         public int prevLifePoints = 3;
         public int prevScore = 0;
@@ -67,6 +70,17 @@ namespace PoguScripts.Scriptable
                 currentGameState = value;
                 GlobalEvent.OnChangeGameStage.Invoke(currentGameState);
             }
+        }
+    }
+    [Serializable]
+    public class GameProgressionData
+    {
+        public bool isComplete = false;
+        public string message;
+        public int scoreLimit = 0;
+        public void Reset()
+        {
+            isComplete = false;
         }
     }
 }

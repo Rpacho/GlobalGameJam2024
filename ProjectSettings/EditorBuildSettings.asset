@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOverScene.unity
     guid: 3c2aade1cec217045b8f9a915f0e6af0
+  - enabled: 1
+    path: Assets/Scenes/NosePick.unity
+    guid: 77ceb4139408dc046add62a00e3285ab
   m_configObjects: {}

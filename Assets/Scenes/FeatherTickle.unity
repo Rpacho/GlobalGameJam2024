@@ -1553,7 +1553,12 @@ MonoBehaviour:
   gameoverCollider: {fileID: 853331666}
   winCollider: {fileID: 1633933741}
   lose: {fileID: 765656034}
-  knockbackForce: {x: -660, y: 0, z: 0}
+  knockbackForce: {x: -1060, y: 0, z: 0}
+  featherClip: {fileID: 8300000, guid: ea4088eef8f525642a7face0e6a98b02, type: 3}
+  squishClip: {fileID: 8300000, guid: 84bf0b36ac0b7764bbe9cfa291b7a9dd, type: 3}
+  stomp:
+  - {fileID: 8300000, guid: 62969d4210ff80d41b8ba59ab7f30143, type: 3}
+  - {fileID: 8300000, guid: e62d9d4639284a243a2af655081d5aa8, type: 3}
 --- !u!4 &1643491872
 Transform:
   m_ObjectHideFlags: 0

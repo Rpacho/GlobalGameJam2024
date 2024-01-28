@@ -260,12 +260,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatorButton: {fileID: 441370866177821221}
   clips:
-  - {fileID: 8300000, guid: 6b18c8282779c6146bfe61ef44693233, type: 3}
-  - {fileID: 8300000, guid: 1435e75dc68f99f41b52c187bc62d8ef, type: 3}
-  - {fileID: 8300000, guid: d2f94d1eb62903e4e9dc5c1c10f8d4db, type: 3}
-  - {fileID: 8300000, guid: 083334fe0fd3a4144b835456c98bfd5c, type: 3}
-  - {fileID: 8300000, guid: 963c7fd0fd12f374094d54f1bb2eea83, type: 3}
-  - {fileID: 8300000, guid: 2c97f3961d5c6cc44b9908928a4113da, type: 3}
+  - {fileID: 8300000, guid: 977ab45c10ed25d4c8b4593b67f0f7f9, type: 3}
+  clickedClips: {fileID: 8300000, guid: 69f06ed41dd0c744ca8084b147cbfbbf, type: 3}
 --- !u!114 &8541316004273809242
 MonoBehaviour:
   m_ObjectHideFlags: 0
